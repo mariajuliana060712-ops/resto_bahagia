@@ -1,74 +1,79 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Kontak | Restoran Nusantara Maria</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<title>Tentang Kami - Restoran Nusantara Maria</title>
 </head>
-
 <body>
+<header id="site-header"></header>
 
-    <!-- ==================== NAVBAR ==================== -->
-    <header class="nav">
-        <div class="wrap bar">
+<main>
+  <section class="hero page-hero">
+    <div class="container"><h1>Tentang Kami</h1><p>Kisah, nilai, dan rasa di balik setiap hidangan kami.</p></div>
+  </section>
 
-            <!-- Logo -->
-            <a class="brand" href="index.html">
-                <img
-                    src="images/logo.png"
-                    alt=""
-                    onerror="this.remove()"
-                >
+  <section class="section">
+    <div class="container two-col">
+      <div class="text-block reveal">
+        <h2>Sejarah dan Cerita Berdirinya</h2>
+        <p>Restoran Nusantara Maria berawal dari dapur rumah di Pamulang, tempat Ibu Maria memasak resep keluarga untuk tetangga setiap akhir pekan. Pesanan yang terus bertambah mendorongnya membuka warung kecil.</p>
+        <p>Kini warung itu menjadi restoran yang menyajikan hidangan dari Sumatera sampai Sulawesi, tetap dengan bumbu yang diracik sendiri setiap pagi.</p>
+      </div>
+      <img class="photo reveal" src="images/hero.jpg" alt="Suasana Restoran Nusantara Maria">
+    </div>
+  </section>
 
-                <span>
-                    Restoran Nusantara <em>Maria</em>
-                </span>
-            </a>
+  <section class="section alt">
+    <div class="container two-col">
+      <div class="text-block reveal">
+        <h2>Filosofi Kami</h2>
+        <p>Makanan adalah cara paling hangat untuk mengenal budaya. Kami memasak dengan sabar, memakai rempah asli, dan menghormati cara masak tiap daerah tanpa menyederhanakannya.</p>
+      </div>
+      <div class="text-block reveal">
+        <h2>Visi dan Misi</h2>
+        <p><strong>Visi:</strong> Menjadi restoran rujukan kuliner Nusantara yang dicintai keluarga Indonesia.</p>
+        <ul class="check-list" style="margin-top:12px">
+          <li>Menyajikan masakan daerah dengan rasa otentik.</li>
+          <li>Memakai bahan segar dari pemasok lokal.</li>
+          <li>Memberi pelayanan ramah dan cepat.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Keunggulan Restoran</h2>
+      <p class="section-sub">Alasan pelanggan kembali lagi.</p>
+      <div class="grid">
+        <div class="feature reveal"><h3>Resep Otentik</h3><p>Setiap menu mengikuti resep asli daerah asalnya.</p></div>
+        <div class="feature reveal"><h3>Bahan Segar</h3><p>Rempah dan bahan utama dibeli setiap hari.</p></div>
+        <div class="feature reveal"><h3>Pesan Mudah</h3><p>Pesan lewat form di website dan kirim langsung ke WhatsApp.</p></div>
+        <div class="feature reveal"><h3>Harga Terjangkau</h3><p>Porsi pas dengan harga yang ramah untuk keluarga.</p></div>
+      </div>
+    </div>
+  </section>
 
-            <!-- Tombol Menu Mobile -->
-            <button
-                class="burger"
-                aria-label="Buka menu"
-                aria-expanded="false"
-            >
-                ☰
-            </button>
+  <section class="section alt">
+    <div class="container">
+      <h2 class="section-title">Makanan Khas Nusantara</h2>
+      <p class="section-sub">Indonesia punya ribuan masakan. Berikut beberapa yang selalu ada di meja kami: rendang dari Minangkabau yang dimasak berjam-jam, gudeg Yogyakarta yang manis legit, dan coto Makassar yang kaya rempah.</p>
+      <div class="photo-row">
+        <img class="photo reveal" src="images/rendang.jpg" alt="Rendang Padang">
+        <img class="photo reveal" src="images/gudeg.jpg" alt="Gudeg Jogja">
+        <img class="photo reveal" src="images/coto-makassar.jpg" alt="Coto Makassar">
+        <img class="photo reveal" src="images/poster.jpg" alt="Poster restoran">
+      </div>
+    </div>
+  </section>
+</main>
 
-
-            <!-- Navigasi -->
-            <nav id="links">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="menu.html">
-                    Menu
-                </a>
-
-                <a href="tentang.html">
-                    Tentang Kami
-                </a>
-
-                <a href="kontak.html">
-                    Kontak
-                </a>
-
-                <!-- Keranjang -->
-                <a
-                    class="cartlink"
-                    href="menu.html#pesan"
-```
+<footer id="site-footer"></footer>
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
