@@ -1,36 +1,104 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Menu | Restoran Nusantara Maria</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
-<header class="nav"><div class="wrap bar"><a class="brand" href="index.html"><img src="images/logo.png" alt="" onerror="this.remove()"><span>Restoran Nusantara <em>Maria</em></span></a>
-<button class="burger" aria-label="Buka menu" aria-expanded="false">☰</button>
-<nav id="links"><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="tentang.html">Tentang Kami</a><a href="kontak.html">Kontak</a><a class="cartlink" href="menu.html#pesan" aria-label="Keranjang">🛒 <span class="cartCount">0</span></a><a class="btn sm" href="menu.html#pesan">Pesan Sekarang</a></nav></div></header>
-<main>
-<section class="pagehead"><div class="wrap"><h1>Daftar Menu</h1><p>Makanan dan minuman khas berbagai daerah di Indonesia</p></div></section>
-<section><div class="wrap">
- <div class="filters" id="filters"><button type="button" class="on" data-f="semua">Semua</button><button type="button" data-f="makanan">Makanan</button><button type="button" data-f="minuman">Minuman</button><button type="button" data-f="dessert">Dessert</button></div>
- <div class="grid" id="menuGrid"></div></div></section>
-<section class="alt" id="pesan"><div class="wrap"><div class="title"><h2>Form Pemesanan</h2></div>
-<form id="orderForm" class="order" novalidate>
- <div class="box">
-  <div id="errors"></div>
-  <h3>Data Pelanggan</h3>
-  <label class="f" for="nama">Nama Lengkap</label><input type="text" id="nama" placeholder="Contoh: Maria Sari" autocomplete="name">
-  <label class="f" for="hp">Nomor HP</label><input type="tel" id="hp" placeholder="08123456789" autocomplete="tel">
-  <label class="f" for="tgl">Tanggal Booking</label><input type="date" id="tgl">
-  <h3>Pilihan Menu</h3>
-  <div class="checks"><label><input type="checkbox" name="kat" value="makanan"> Makanan</label><label><input type="checkbox" name="kat" value="minuman"> Minuman</label><label><input type="checkbox" name="kat" value="dessert"> Dessert</label></div>
-  <div id="pick"></div>
-  <h3>Metode Pembayaran</h3>
-  <div class="opts"><label><input type="radio" name="bayar" value="kartu"> Kartu Debit/Kredit</label><label><input type="radio" name="bayar" value="ewallet"> Dompet Digital</label><label><input type="radio" name="bayar" value="cash"> Cash</label></div>
-  <div class="opts" id="payOpts" style="margin-top:12px"></div>
-  <h3>Pengantaran</h3>
-  <label class="f" for="alamat">Alamat Pengantaran</label><textarea id="alamat" rows="3" placeholder="Jalan, nomor, kecamatan, kota"></textarea>
-  <label class="f" for="catatan">Catatan Pesanan</label><textarea id="catatan" rows="2" placeholder="Pedas sedang, tidak menggunakan bawang."></textarea>
- </div>
- <aside class="box sum"><h3>Pesanan Anda</h3><ul id="cartList"></ul>
-  <div class="total"><span>Total</span><span id="cartTotal">Rp0</span></div>
-  <button class="btn dark" style="width:100%;margin-top:16px" type="submit">Kirim Pesanan</button>
-  <button type="button" class="btn ghost" id="clearCart">Kosongkan Pesanan</button></aside>
-</form></div></section>
-</main>
-<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="box"><h3>✅ Pesanan Berhasil Dibuat</h3><p>Periksa ringkasan pesanan Anda, lalu kirim ke restoran lewat WhatsApp.</p><pre id="summary"></pre>
- <a class="btn dark" id="waBtn" target="_blank" rel="noopener">Kirim via WhatsApp</a><button type="button" class="btn" id="newOrder">Pesanan Baru</button><button type="button" class="btn ghost" id="closeModal">Tutup</button></div></div>
-<footer><div class="wrap"><p>© 2026 Restoran Nusantara Maria · Jl. Contoh No. 123, Pamulang, Tangerang Selatan</p></div></footer><script src="script.js"></script></body></html>
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Menu | Restoran Nusantara Maria</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="nav">
+        <div class="wrap bar">
+
+            <!-- Logo / Brand -->
+            <a class="brand" href="index.html">
+                <img
+                    src="images/logo.png"
+                    alt=""
+                    onerror="this.remove()"
+                >
+
+                <span>
+                    Restoran Nusantara <em>Maria</em>
+                </span>
+            </a>
+
+
+            <!-- Tombol Menu Mobile -->
+            <button
+                class="burger"
+                aria-label="Buka menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+
+            <!-- Navigasi -->
+            <nav id="links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="menu.html">
+                    Menu
+                </a>
+
+                <a href="tentang.html">
+                    Tentang Kami
+                </a>
+
+                <a href="kontak.html">
+                    Kontak
+                </a>
+
+                <!-- Keranjang -->
+                <a
+                    class="cartlink"
+                    href="menu.html#pesan"
+                    aria-label="Keranjang"
+                >
+                    🛒
+                    <span class="cartCount">0</span>
+                </a>
+
+                <!-- Tombol Pesan -->
+                <a
+                    class="btn sm"
+                    href="menu.html#pesan"
+                >
+                    Pesan Sekarang
+                </a>
+
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main>
+
+        <!-- ==================== HEADER MENU ==================== -->
+        <section class="pagehead">
+            <div class="wrap">
+
+                <h1>
+                    Daftar Menu
+```
