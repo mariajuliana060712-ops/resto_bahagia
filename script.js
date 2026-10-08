@@ -1,1043 +1,345 @@
-```javascript
 /* =========================================================
-   RESTORAN NUSANTARA MARIA
-   JavaScript utama website
+   Restoran Nusantara Maria - script.js
+   Isi: konfigurasi, data menu, keranjang, navbar/footer,
+        filter menu, form pemesanan, validasi, pesan WhatsApp
    ========================================================= */
+"use strict";
 
-
-/* =========================================================
-   1. KONFIGURASI
-   ========================================================= */
-
-/*
-    Ganti nomor WhatsApp restoran di bawah ini.
-
-    Format internasional:
-    - Awali dengan 62
-    - Tanpa 0
-    - Tanpa tanda +
-    - Tanpa spasi
-
-    Contoh:
-    08123456789 → "628123456789"
-*/
-
+/* ---------- 1. KONFIGURASI (bagian yang boleh diganti) ---------- */
+// GANTI nomor WhatsApp restoran asli di sini.
+// Format: kode negara tanpa "+" dan tanpa spasi. Contoh 0812-3456-7890 menjadi 6281234567890
 const WA_NUMBER = "6281234567890";
 
+// GANTI data kontak berikut sesuai restoran Anda (dipakai di footer)
+const KONTAK = {
+  alamat: "Jl. Contoh No. 123, Pamulang, Tangerang Selatan, Banten",
+  email: "restoran@example.com",
+  instagram: "restorannusantara",
+  jam: "Senin - Minggu, 10.00 - 22.00 WIB"
+};
 
-/* =========================================================
-   2. DATA MENU
-   ========================================================= */
-
-/*
-    Ganti foto:
-    Simpan foto di folder images/ dengan nama yang sama
-    seperti yang tertulis pada properti "img".
-
-    Jika file belum tersedia, emoji akan tetap muncul.
-*/
-
+/* ---------- 2. DATA MENU ----------
+   Untuk mengganti foto: simpan foto di folder images/ lalu ubah nilai "img".
+   Untuk menambah menu: salin satu baris, beri id baru yang unik. */
 const MENU = [
-    {
-        id: 1,
-        name: "Rendang Padang",
-        short: "Rendang",
-        origin: "Sumatera Barat",
-        cat: "makanan",
-        price: 35000,
-        img: "images/rendang.jpg",
-        emoji: "🍖",
-        desc: "Daging sapi empuk dimasak berjam-jam bersama santan dan rempah pilihan."
-    },
-
-    {
-        id: 2,
-        name: "Nasi Liwet",
-        short: "Nasi Liwet",
-        origin: "Solo, Jawa Tengah",
-        cat: "makanan",
-        price: 28000,
-        img: "images/nasi-liwet.jpg",
-        emoji: "🍚",
-        desc: "Nasi gurih bersantan dengan ayam suwir, telur, dan labu siam."
-    },
-
-    {
-        id: 3,
-        name: "Gudeg Jogja",
-        short: "Gudeg",
-        origin: "Yogyakarta",
-        cat: "makanan",
-        price: 30000,
-        img: "images/gudeg.jpg",
-        emoji: "🍛",
-        desc: "Nangka muda dimasak manis legit bersama ayam, telur, dan krecek."
-    },
-
-    {
-        id: 4,
-        name: "Soto Betawi",
-        short: "Soto Betawi",
-        origin: "DKI Jakarta",
-        cat: "makanan",
-        price: 32000,
-        img: "images/soto-betawi.jpg",
-        emoji: "🍲",
-        desc: "Kuah santan dan susu yang gurih dengan potongan daging sapi."
-    },
-
-    {
-        id: 5,
-        name: "Pempek Palembang",
-        short: "Pempek",
-        origin: "Sumatera Selatan",
-        cat: "makanan",
-        price: 25000,
-        img: "images/pempek.jpg",
-        emoji: "🐟",
-        desc: "Olahan ikan dan sagu dengan kuah cuko asam, manis, dan pedas."
-    },
-
-    {
-        id: 6,
-        name: "Ayam Betutu Bali",
-        short: "Ayam Betutu",
-        origin: "Bali",
-        cat: "makanan",
-        price: 35000,
-        img: "images/ayam-betutu.jpg",
-        emoji: "🍗",
-        desc: "Ayam berbumbu base genep, dibungkus daun pisang dan dimasak lama."
-    },
-
-    {
-        id: 7,
-        name: "Rawon Jawa Timur",
-        short: "Rawon",
-        origin: "Jawa Timur",
-        cat: "makanan",
-        price: 32000,
-        img: "images/rawon.jpg",
-        emoji: "🥘",
-        desc: "Sup daging berkuah hitam dari kluwek, disajikan dengan tauge dan sambal."
-    },
-
-    {
-        id: 8,
-        name: "Coto Makassar",
-        short: "Coto Makassar",
-        origin: "Sulawesi Selatan",
-        cat: "makanan",
-        price: 30000,
-        img: "images/coto-makassar.jpg",
-        emoji: "🍜",
-        desc: "Sup daging sapi berkuah kacang dan rempah, nikmat bersama ketupat."
-    },
-
-    {
-        id: 9,
-        name: "Sate Madura",
-        short: "Sate Madura",
-        origin: "Madura, Jawa Timur",
-        cat: "makanan",
-        price: 28000,
-        img: "images/sate-madura.jpg",
-        emoji: "🍢",
-        desc: "Sate ayam bakar dengan bumbu kacang manis gurih dan bawang goreng."
-    },
-
-    {
-        id: 10,
-        name: "Gado-Gado",
-        short: "Gado-Gado",
-        origin: "DKI Jakarta",
-        cat: "makanan",
-        price: 22000,
-        img: "images/gado-gado.jpg",
-        emoji: "🥗",
-        desc: "Sayur rebus, tahu, tempe, dan telur dengan saus kacang."
-    },
-
-    {
-        id: 11,
-        name: "Es Cendol",
-        short: "Es Cendol",
-        origin: "Jawa Barat",
-        cat: "minuman",
-        price: 15000,
-        img: "images/es-cendol.jpg",
-        emoji: "🥤",
-        desc: "Cendol hijau, santan, dan gula merah dalam es serut."
-    },
-
-    {
-        id: 13,
-        name: "Es Teh Manis",
-        short: "Es Teh",
-        origin: "Nusantara",
-        cat: "minuman",
-        price: 8000,
-        img: "images/es-teh.jpg",
-        emoji: "🧋",
-        desc: "Teh seduh segar dengan gula dan es batu."
-    },
-
-    {
-        id: 14,
-        name: "Es Jeruk",
-        short: "Es Jeruk",
-        origin: "Nusantara",
-        cat: "minuman",
-        price: 10000,
-        img: "images/es-jeruk.jpg",
-        emoji: "🍊",
-        desc: "Perasan jeruk segar dengan es, asam manis menyegarkan."
-    },
-
-    {
-        id: 12,
-        name: "Es Pisang Ijo",
-        short: "Es Pisang Ijo",
-        origin: "Sulawesi Selatan",
-        cat: "dessert",
-        price: 18000,
-        img: "images/es-pisang-ijo.jpg",
-        emoji: "🍌",
-        desc: "Pisang berbalut adonan hijau, bubur sumsum, sirup, dan es serut."
-    },
-
-    {
-        id: 15,
-        name: "Klepon",
-        short: "Klepon",
-        origin: "Jawa",
-        cat: "dessert",
-        price: 12000,
-        img: "images/klepon.jpg",
-        emoji: "🟢",
-        desc: "Bola ketan isi gula merah cair, digulung kelapa parut."
-    }
+  { id: 1,  name: "Rendang Padang",   region: "Sumatera Barat",   cat: "makanan", price: 35000, img: "images/rendang.jpg",       desc: "Daging sapi dimasak berjam-jam dengan santan dan rempah hingga empuk dan pekat." },
+  { id: 2,  name: "Nasi Liwet",       region: "Jawa Tengah",      cat: "makanan", price: 28000, img: "images/nasi-liwet.jpg",    desc: "Nasi gurih berkuah santan, disajikan dengan ayam suwir, telur, dan sayur labu." },
+  { id: 3,  name: "Gudeg Jogja",      region: "Yogyakarta",       cat: "makanan", price: 30000, img: "images/gudeg.jpg",         desc: "Nangka muda dimasak manis bersama gula aren, krecek, dan telur pindang." },
+  { id: 4,  name: "Soto Betawi",      region: "Jakarta",          cat: "makanan", price: 32000, img: "images/soto-betawi.jpg",   desc: "Soto kuah santan dan susu dengan daging sapi, tomat, emping, dan acar." },
+  { id: 5,  name: "Pempek Palembang", region: "Sumatera Selatan", cat: "makanan", price: 25000, img: "images/pempek.jpg",        desc: "Olahan ikan dan sagu disajikan dengan kuah cuko asam, manis, dan pedas." },
+  { id: 6,  name: "Ayam Betutu Bali", region: "Bali",             cat: "makanan", price: 35000, img: "images/ayam-betutu.jpg",   desc: "Ayam berbumbu base genep khas Bali, dibungkus daun pisang lalu dipanggang." },
+  { id: 7,  name: "Rawon Jawa Timur", region: "Jawa Timur",       cat: "makanan", price: 32000, img: "images/rawon.jpg",         desc: "Sup daging berkuah hitam dari kluwek, dengan tauge pendek dan sambal." },
+  { id: 8,  name: "Coto Makassar",    region: "Sulawesi Selatan", cat: "makanan", price: 30000, img: "images/coto-makassar.jpg", desc: "Sup jeroan dan daging sapi dengan bumbu kacang, dimakan bersama ketupat." },
+  { id: 9,  name: "Sate Madura",      region: "Jawa Timur",       cat: "makanan", price: 28000, img: "images/sate-madura.jpg",   desc: "Sate ayam berbumbu kacang dan kecap manis, dibakar di atas arang." },
+  { id: 10, name: "Gado-Gado",        region: "Jakarta",          cat: "makanan", price: 22000, img: "images/gado-gado.jpg",     desc: "Sayuran rebus, tahu, tempe, dan telur dengan saus kacang yang kental." },
+  { id: 11, name: "Es Cendol",        region: "Jawa Barat",       cat: "minuman", price: 15000, img: "images/es-cendol.jpg",     desc: "Cendol hijau, santan, dan gula aren cair di atas es serut." },
+  { id: 12, name: "Es Teh Nusantara", region: "Jawa",             cat: "minuman", price:  8000, img: "images/es-teh.jpg",        desc: "Teh melati dingin dengan gula batu, segar diminum bersama makanan pedas." },
+  { id: 13, name: "Es Jeruk",         region: "Nusantara",        cat: "minuman", price: 12000, img: "images/es-jeruk.jpg",      desc: "Perasan jeruk peras segar dengan es batu dan sedikit gula." },
+  { id: 14, name: "Es Pisang Ijo",    region: "Sulawesi Selatan", cat: "dessert", price: 18000, img: "images/es-pisang-ijo.jpg", desc: "Pisang berbalut adonan hijau, disiram sirup, santan, dan es serut." },
+  { id: 15, name: "Klepon",           region: "Jawa",             cat: "dessert", price: 15000, img: "images/klepon.jpg",        desc: "Bola ketan hijau berisi gula aren cair, digulung dalam kelapa parut." }
 ];
+const KATEGORI = { makanan: "Makanan", minuman: "Minuman", dessert: "Dessert" };
+const FEATURED_IDS = [1, 3, 4, 6, 11, 14]; // menu unggulan di halaman Home
 
+/* ---------- 3. FUNGSI BANTU ---------- */
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+const rupiah = n => "Rp" + n.toLocaleString("id-ID");
+const findItem = id => MENU.find(m => m.id === Number(id));
 
-/* =========================================================
-   3. KONFIGURASI FITUR
-   ========================================================= */
+// Gambar placeholder otomatis jika file foto di folder images/ belum ada
+const svgUri = svg => "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+const IMG_PLACEHOLDER = svgUri("<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='#ecdfc0'/><text x='50%' y='50%' font-family='Georgia' font-size='26' fill='#4a2c1a' text-anchor='middle'>Foto Nusantara</text></svg>");
+const LOGO_PLACEHOLDER = svgUri("<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><circle cx='40' cy='40' r='40' fill='#b98a2e'/><text x='50%' y='57%' font-family='Georgia' font-size='34' fill='#fff' text-anchor='middle'>M</text></svg>");
+document.addEventListener("error", e => {
+  const img = e.target;
+  if (img.tagName !== "IMG" || img.dataset.fallback) return;
+  img.dataset.fallback = "1";
+  img.src = img.classList.contains("logo") ? LOGO_PLACEHOLDER : IMG_PLACEHOLDER;
+}, true);
 
-const FEATURED = [1, 3, 4, 5, 6, 9];
-
-const PAY = {
-    kartu: ["Visa", "Mastercard"],
-    ewallet: ["GoPay", "OVO", "DANA", "ShopeePay"],
-    cash: []
-};
-
-const PAYNAME = {
-    kartu: "Kartu Debit/Kredit",
-    ewallet: "Dompet Digital",
-    cash: "Cash"
-};
-
-
-/* =========================================================
-   4. HELPER FUNCTION
-   ========================================================= */
-
-const $ = (s) => document.querySelector(s);
-
-const $$ = (s) => [...document.querySelectorAll(s)];
-
-const rp = (n) => "Rp" + n.toLocaleString("id-ID");
-
-const find = (id) => MENU.find((m) => m.id == id);
-
-
-/* =========================================================
-   5. CART / KERANJANG
-   ========================================================= */
-
-let cart = JSON.parse(
-    localStorage.getItem("cart") || "{}"
-);
-
-
-/* Hapus item yang sudah tidak ada di MENU */
-Object.keys(cart).forEach((i) => {
-    if (!find(i)) {
-        delete cart[i];
-    }
-});
-
-
-/* Hitung total harga */
-const total = () =>
-    Object.entries(cart).reduce(
-        (s, [id, q]) => s + find(id).price * q,
-        0
-    );
-
-
-/* Simpan cart ke localStorage */
-const save = () => {
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-    refresh();
-};
-
-
-/* =========================================================
-   6. TOAST NOTIFICATION
-   ========================================================= */
-
-function toast(t) {
-    let el = $(".toast");
-
-    if (!el) {
-        el = document.createElement("div");
-        el.className = "toast";
-        document.body.append(el);
-    }
-
-    el.textContent = t;
-
-    el.classList.add("show");
-
-    clearTimeout(el.t);
-
-    el.t = setTimeout(
-        () => el.classList.remove("show"),
-        2400
-    );
+let toastTimer;
+function showToast(msg) {
+  const t = $("#toast");
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
 }
 
+/* ---------- 4. KERANJANG ---------- */
+// cart berbentuk { idMenu: jumlah }. Disimpan di localStorage agar tetap ada saat pindah halaman.
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem("nusantaraCart")) || {}; } catch (e) { cart = {}; }
 
-/* =========================================================
-   7. LOGO PEMBAYARAN
-   ========================================================= */
-
-/*
-    Placeholder teks untuk logo pembayaran.
-
-    Jika ingin menggunakan logo asli,
-    dapat diganti dengan <img>.
-*/
-
-const logo = (n) =>
-    `<span class="plogo ${n.toLowerCase()}">${n}</span>`;
-
-
-/* =========================================================
-   8. CARD MENU
-   ========================================================= */
-
-const card = (m) =>
-    `
-    <article class="card">
-
-        <div class="img">
-            <span>${m.emoji}</span>
-
-            <img
-                src="${m.img}"
-                alt="${m.name}"
-                loading="lazy"
-                onerror="this.remove()"
-            >
-        </div>
-
-        <div class="body">
-
-            <small class="origin">
-                📍 ${m.origin}
-            </small>
-
-            <h3>
-                ${m.name}
-            </h3>
-
-            <p>
-                ${m.desc}
-            </p>
-
-            <div class="foot">
-
-                <b>
-                    ${rp(m.price)}
-                </b>
-
-                <button
-                    type="button"
-                    class="btn sm"
-                    data-add="${m.id}"
-                >
-                    Tambah ke Pesanan
-                </button>
-
-            </div>
-
-        </div>
-
-    </article>
-    `;
-
-
-/* =========================================================
-   9. RENDER MENU
-   ========================================================= */
-
-function renderMenu(f = "semua") {
-    const g = $("#menuGrid");
-
-    if (!g) {
-        return;
-    }
-
-    g.innerHTML = MENU
-        .filter(
-            (m) => f == "semua" || m.cat == f
-        )
-        .map(card)
-        .join("");
-}
-
-
-/* =========================================================
-   10. PILIHAN MENU PADA FORM
-   ========================================================= */
-
-/*
-    Menampilkan daftar menu berdasarkan
-    kategori yang dicentang.
-*/
-
-function renderPick() {
-    const box = $("#pick");
-
-    if (!box) {
-        return;
-    }
-
-    const sel = $$("input[name=kat]:checked")
-        .map((i) => i.value);
-
-    box.innerHTML = sel
-        .map(
-            (k) =>
-                `
-                <fieldset class="grp">
-
-                    <legend>
-                        ${k}
-                    </legend>
-
-                    ${MENU
-                        .filter((m) => m.cat == k)
-                        .map(
-                            (m) =>
-                                `
-                                <div class="pick-row">
-
-                                    <label>
-
-                                        <input
-                                            type="checkbox"
-                                            data-pick="${m.id}"
-                                            ${
-                                                cart[m.id]
-                                                    ? "checked"
-                                                    : ""
-                                            }
-                                        >
-
-                                        ${m.short}
-
-                                        <small>
-                                            ${rp(m.price)}
-                                        </small>
-
-                                    </label>
-
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        value="${cart[m.id] || 1}"
-                                        data-qty="${m.id}"
-                                        ${
-                                            cart[m.id]
-                                                ? ""
-                                                : "disabled"
-                                        }
-                                        aria-label="Jumlah ${m.short}"
-                                    >
-
-                                </div>
-                                `
-                        )
-                        .join("")}
-
-                </fieldset>
-                `
-        )
-        .join("");
-}
-
-
-/* =========================================================
-   11. RENDER CART
-   ========================================================= */
-
-function renderCart() {
-    const ul = $("#cartList");
-
-    if (!ul) {
-        return;
-    }
-
-    const ids = Object.keys(cart);
-
-    ul.innerHTML = ids.length
-        ? ids
-              .map((id) => {
-                  const m = find(id);
-                  const q = cart[id];
-
-                  return `
-                    <li>
-
-                        <span>
-                            ${m.short} x ${q}
-                        </span>
-
-                        <b>
-                            ${rp(m.price * q)}
-                        </b>
-
-                        <span class="btns">
-
-                            <button
-                                type="button"
-                                data-dec="${id}"
-                                aria-label="Kurangi"
-                            >
-                                −
-                            </button>
-
-                            <button
-                                type="button"
-                                data-inc="${id}"
-                                aria-label="Tambah"
-                            >
-                                +
-                            </button>
-
-                            <button
-                                type="button"
-                                data-del="${id}"
-                                aria-label="Hapus"
-                            >
-                                🗑
-                            </button>
-
-                        </span>
-
-                    </li>
-                    `;
-              })
-              .join("")
-        : "<li>Belum ada pesanan. Pilih menu di atas.</li>";
-
-    $("#cartTotal").textContent = rp(total());
-}
-
-
-/* =========================================================
-   12. REFRESH CART
-   ========================================================= */
+const cartCount = () => Object.values(cart).reduce((a, b) => a + b, 0);
+const cartTotal = () => Object.entries(cart).reduce((sum, [id, qty]) => sum + findItem(id).price * qty, 0);
 
 function refresh() {
-    const n = Object.values(cart).reduce(
-        (a, b) => a + b,
-        0
-    );
+  try { localStorage.setItem("nusantaraCart", JSON.stringify(cart)); } catch (e) { /* abaikan */ }
+  const badge = $("#cartCount");
+  if (badge) badge.textContent = cartCount();
+  renderOrder();
+}
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  showToast(findItem(id).name + " ditambahkan ke pesanan");
+  refresh();
+}
+function setQty(id, qty) {
+  qty = Math.floor(Number(qty));
+  cart[id] = qty >= 1 ? qty : 1; // jumlah minimal 1
+  refresh();
+}
+function removeFromCart(id) { delete cart[id]; refresh(); }
 
-    $$(".cartCount").forEach(
-        (e) => (e.textContent = n)
-    );
+// Satu tempat untuk semua tombol ber-atribut data-act
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act]");
+  if (!el) return;
+  const id = el.dataset.id;
+  if (el.dataset.act === "add") addToCart(id);
+  if (el.dataset.act === "inc") setQty(id, cart[id] + 1);
+  if (el.dataset.act === "dec") setQty(id, cart[id] - 1);
+  if (el.dataset.act === "remove") removeFromCart(id);
+});
 
-    Object.keys(cart).forEach((id) => {
-        const c = $(
-            `input[name=kat][value=${find(id).cat}]`
-        );
-
-        if (c) {
-            c.checked = true;
-        }
+/* ---------- 5. NAVBAR & FOOTER ---------- */
+function buildLayout() {
+  const page = location.pathname.split("/").pop() || "index.html";
+  const link = (href, text) => `<li><a href="${href}"${page === href ? ' class="active"' : ""}>${text}</a></li>`;
+  const header = $("#site-header");
+  if (header) {
+    header.className = "site-header";
+    header.innerHTML = `
+      <nav class="nav" aria-label="Navigasi utama">
+        <a class="brand" href="index.html">
+          <img class="logo" src="images/logo.png" alt="Logo Restoran Nusantara Maria">
+          <span>Restoran <b>Nusantara</b> Maria</span>
+        </a>
+        <a class="cart" href="menu.html#pesan" aria-label="Keranjang pesanan">🛒<em id="cartCount">0</em></a>
+        <button class="burger" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <ul class="links" id="navLinks">
+          ${link("index.html", "Home")}
+          ${link("menu.html", "Menu")}
+          ${link("tentang.html", "Tentang Kami")}
+          ${link("kontak.html", "Kontak")}
+          <li><a class="btn btn-gold small" href="menu.html#pesan">Pesan Sekarang</a></li>
+        </ul>
+      </nav>`;
+    const burger = $(".burger", header), links = $("#navLinks");
+    burger.addEventListener("click", () => {
+      const open = links.classList.toggle("open");
+      burger.setAttribute("aria-expanded", open);
     });
-
-    renderPick();
-    renderCart();
+    links.addEventListener("click", e => { if (e.target.closest("a")) links.classList.remove("open"); });
+  }
+  const footer = $("#site-footer");
+  if (footer) {
+    footer.className = "site-footer";
+    footer.innerHTML = `
+      <div class="container footer-grid">
+        <div><h4>Restoran Nusantara Maria</h4><p>Cita rasa Nusantara, hadir di setiap sajian.</p></div>
+        <div><h4>Kontak</h4><p>${KONTAK.alamat}</p><p><a href="mailto:${KONTAK.email}">${KONTAK.email}</a></p></div>
+        <div><h4>Jam Operasional</h4><p>${KONTAK.jam}</p>
+          <p><a href="https://instagram.com/${KONTAK.instagram}" target="_blank" rel="noopener">@${KONTAK.instagram}</a></p></div>
+      </div>
+      <p class="copy">© ${new Date().getFullYear()} Restoran Nusantara Maria. Semua hak dilindungi.</p>`;
+  }
 }
 
-
-/* =========================================================
-   13. METODE PEMBAYARAN
-   ========================================================= */
-
-function renderPay() {
-    const o = $("#payOpts");
-
-    if (!o) {
-        return;
-    }
-
-    const v =
-        ($("input[name=bayar]:checked") || {})
-            .value;
-
-    o.innerHTML =
-        (PAY[v] || [])
-            .map(
-                (n) =>
-                    `
-                    <label>
-
-                        <input
-                            type="radio"
-                            name="sub"
-                            value="${n}"
-                        >
-
-                        ${logo(n)}
-                        ${n}
-
-                    </label>
-                    `
-            )
-            .join("")
-        ||
-        (
-            v == "cash"
-                ? "<small>Bayar tunai saat pesanan diterima / di restoran.</small>"
-                : ""
-        );
+/* ---------- 6. KARTU MENU, FILTER, MENU UNGGULAN ---------- */
+function cardHTML(m) {
+  return `
+    <article class="card reveal" data-cat="${m.cat}">
+      <img src="${m.img}" alt="${m.name}" loading="lazy">
+      <div class="card-body">
+        <h3>${m.name}</h3>
+        <span class="region">${m.region}</span>
+        <p>${m.desc}</p>
+        <span class="price">${rupiah(m.price)}</span>
+        <button class="btn btn-green small" data-act="add" data-id="${m.id}">Tambah ke Pesanan</button>
+      </div>
+    </article>`;
+}
+function renderMenuGrid(filter = "semua") {
+  const grid = $("#menuGrid");
+  if (!grid) return;
+  const list = MENU.filter(m => filter === "semua" || m.cat === filter);
+  grid.innerHTML = list.map(cardHTML).join("");
+  observeReveal();
+}
+function initFilters() {
+  $$(".filter").forEach(btn => btn.addEventListener("click", () => {
+    $$(".filter").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderMenuGrid(btn.dataset.filter);
+  }));
+}
+function renderFeatured() {
+  const grid = $("#featuredGrid");
+  if (grid) grid.innerHTML = FEATURED_IDS.map(id => cardHTML(findItem(id))).join("");
 }
 
+/* ---------- 7. FORM PEMESANAN ---------- */
+const selectedCats = new Set(); // kategori yang sedang dicentang
 
-/* =========================================================
-   14. EVENT CLICK
-   ========================================================= */
+function renderOrder() {
+  const picker = $("#pickList");
+  if (!picker) return; // halaman ini tidak punya form
+  // kategori otomatis tercentang jika ada menu dari kategori itu di keranjang
+  Object.keys(cart).forEach(id => selectedCats.add(findItem(id).cat));
+  $$('input[name="kategori"]').forEach(cb => { cb.checked = selectedCats.has(cb.value); });
 
-document.addEventListener("click", (e) => {
-    const t = e.target.closest("button,a");
+  // daftar pilihan menu per kategori (checkbox + input jumlah)
+  picker.innerHTML = [...selectedCats].map(cat => `
+    <div class="pick-group"><h4>${KATEGORI[cat]}</h4>
+      ${MENU.filter(m => m.cat === cat).map(m => `
+        <div class="pick-row">
+          <label><input type="checkbox" data-pick="${m.id}" ${cart[m.id] ? "checked" : ""}>${m.name} <small>(${rupiah(m.price)})</small></label>
+          ${cart[m.id] ? `<input class="qty" type="number" min="1" value="${cart[m.id]}" data-qty="${m.id}" aria-label="Jumlah ${m.name}">` : ""}
+        </div>`).join("")}
+    </div>`).join("") || '<p class="empty">Pilih kategori di atas untuk menampilkan menu.</p>';
 
-    if (!t) {
-        return;
+  // ringkasan "Pesanan Anda"
+  const ids = Object.keys(cart);
+  $("#sumList").innerHTML = ids.length ? ids.map(id => {
+    const m = findItem(id), q = cart[id];
+    return `
+      <div class="sum-row">
+        <span class="sum-name">${m.name} x ${q}</span><span class="sum-price">${rupiah(m.price * q)}</span>
+        <div class="sum-ctrl">
+          <button type="button" class="mini" data-act="dec" data-id="${id}" aria-label="Kurangi">−</button>
+          <span>${q}</span>
+          <button type="button" class="mini" data-act="inc" data-id="${id}" aria-label="Tambah">+</button>
+          <button type="button" class="mini del" data-act="remove" data-id="${id}">Hapus</button>
+        </div>
+      </div>`;
+  }).join("") : '<p class="empty">Belum ada pesanan. Tambahkan menu favorit Anda.</p>';
+  $("#sumTotal").textContent = rupiah(cartTotal());
+}
+
+function initOrderForm() {
+  const form = $("#orderForm");
+  if (!form) return;
+  form.elements.tanggal.min = todayStr();
+
+  // centang/hapus kategori
+  $$('input[name="kategori"]', form).forEach(cb => cb.addEventListener("change", () => {
+    if (cb.checked) selectedCats.add(cb.value);
+    else {
+      selectedCats.delete(cb.value);
+      MENU.filter(m => m.cat === cb.value).forEach(m => delete cart[m.id]); // menu kategori itu ikut dihapus
     }
-
-    const d = t.dataset;
-
-
-    /* Tambah menu */
-    if (d.add) {
-        cart[d.add] =
-            (cart[d.add] || 0) + 1;
-
-        save();
-
-        toast(
-            find(d.add).short +
-                " ditambahkan ke pesanan"
-        );
+    refresh();
+  }));
+  // centang menu / ubah jumlah
+  form.addEventListener("change", e => {
+    if (e.target.dataset.pick) {
+      e.target.checked ? setQty(e.target.dataset.pick, 1) : removeFromCart(e.target.dataset.pick);
     }
+    if (e.target.dataset.qty) setQty(e.target.dataset.qty, e.target.value);
+  });
+  // metode pembayaran: tampilkan pilihan lanjutan
+  $$('input[name="bayar"]', form).forEach(r => r.addEventListener("change", () => {
+    $$('input[name="opsi"]', form).forEach(o => (o.checked = false));
+    $("#subCard").hidden = r.value !== "Kartu Debit/Kredit";
+    $("#subWallet").hidden = r.value !== "Dompet Digital";
+  }));
+  form.addEventListener("submit", e => { e.preventDefault(); submitOrder(form); });
 
+  $("#modalClose").addEventListener("click", () => $("#modal").classList.remove("show"));
+  $("#newOrder").addEventListener("click", () => {
+    cart = {}; selectedCats.clear(); form.reset();
+    $("#subCard").hidden = $("#subWallet").hidden = true;
+    $("#modal").classList.remove("show");
+    refresh();
+  });
+}
 
-    /* Tambah jumlah */
-    if (d.inc) {
-        cart[d.inc]++;
+function todayStr() {
+  return new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+}
 
-        save();
-    }
+/* Validasi: mengembalikan objek { namaField: pesanError } */
+function validate(f) {
+  const err = {};
+  if (f.nama.value.trim().length < 3) err.nama = "Nama lengkap wajib diisi (minimal 3 huruf).";
+  if (!/^(\+62|62|0)8\d{8,11}$/.test(f.hp.value.replace(/[\s-]/g, ""))) err.hp = "Nomor HP tidak valid. Contoh: 081234567890.";
+  if (!f.tanggal.value) err.tanggal = "Tanggal booking wajib dipilih.";
+  else if (f.tanggal.value < todayStr()) err.tanggal = "Tanggal booking tidak boleh sebelum hari ini.";
+  if (!cartCount()) err.menu = "Pilih minimal satu menu.";
+  if (!f.bayar.value) err.bayar = "Pilih metode pembayaran.";
+  else if (f.bayar.value !== "Cash" && !f.opsi.value) err.bayar = "Pilih jenis kartu atau dompet digital.";
+  if (f.alamat.value.trim().length < 10) err.alamat = "Alamat pengantaran wajib diisi lengkap.";
+  return err;
+}
 
+function buildMessage(f) {
+  const lines = Object.entries(cart).map(([id, q]) => `- ${findItem(id).name} x${q}`).join("\n");
+  const bayar = f.bayar.value === "Cash" ? "Cash" : `${f.bayar.value} - ${f.opsi.value}`;
+  return `HALO, SAYA INGIN MEMESAN
 
-    /* Kurangi jumlah */
-    if (d.dec && cart[d.dec] > 1) {
-        cart[d.dec]--;
+Nama: ${f.nama.value.trim()}
+No. HP: ${f.hp.value.trim()}
+Tanggal Booking: ${f.tanggal.value}
 
-        save();
-    }
+PESANAN:
+${lines}
 
+TOTAL:
+${rupiah(cartTotal())}
 
-    /* Hapus menu */
-    if (d.del) {
-        delete cart[d.del];
+METODE PEMBAYARAN:
+${bayar}
 
-        save();
-    }
+CATATAN:
+${f.catatan.value.trim() || "-"}
 
+ALAMAT:
+${f.alamat.value.trim()}`;
+}
 
-    /* Filter menu */
-    if (d.f) {
-        $$("#filters button").forEach(
-            (b) =>
-                b.classList.toggle(
-                    "on",
-                    b == t
-                )
-        );
+function submitOrder(form) {
+  const f = form.elements, errors = validate(f);
+  $$(".field", form).forEach(el => el.classList.remove("has-error"));
+  $$("[data-error]", form).forEach(el => (el.textContent = ""));
+  Object.entries(errors).forEach(([key, msg]) => {
+    const out = $(`[data-error="${key}"]`, form);
+    if (out) { out.textContent = msg; out.closest(".field")?.classList.add("has-error"); }
+  });
+  const alertBox = $("#formAlert");
+  if (Object.keys(errors).length) {
+    alertBox.style.display = "block";
+    alertBox.textContent = "Data belum lengkap. Periksa kolom yang ditandai di bawah.";
+    $(`[data-error="${Object.keys(errors)[0]}"]`, form)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  alertBox.style.display = "none";
+  const message = buildMessage(f);
+  $("#modalSummary").textContent = message;
+  $("#waLink").href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+  $("#modal").classList.add("show");
+  showToast("Pesanan berhasil dibuat!");
+}
 
-        renderMenu(d.f);
-    }
+/* ---------- 8. ANIMASI MUNCUL SAAT SCROLL ---------- */
+let observer;
+function observeReveal() {
+  observer = observer || new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add("visible"); observer.unobserve(en.target); }
+  }), { threshold: .12 });
+  $$(".reveal:not(.visible)").forEach(el => observer.observe(el));
+}
 
-
-    /* Menu mobile */
-    if (t.classList.contains("burger")) {
-        const o =
-            $("#links").classList.toggle("open");
-
-        t.setAttribute(
-            "aria-expanded",
-            o
-        );
-    }
-
-
-    /* Kosongkan cart */
-    if (t.id == "clearCart") {
-        cart = {};
-
-        save();
-    }
-
-
-    /* Tutup modal */
-    if (t.id == "closeModal") {
-        $("#modal").classList.remove("show");
-    }
-
-
-    /* Pesanan baru */
-    if (t.id == "newOrder") {
-        cart = {};
-
-        save();
-
-        $("#orderForm").reset();
-
-        renderPay();
-
-        $("#modal").classList.remove("show");
-    }
+/* ---------- 9. START ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  buildLayout();
+  renderFeatured();
+  renderMenuGrid();
+  initFilters();
+  initOrderForm();
+  refresh();
+  observeReveal();
 });
-
-
-/* =========================================================
-   15. EVENT CHANGE
-   ========================================================= */
-
-document.addEventListener("change", (e) => {
-    const t = e.target;
-
-
-    /* Kategori menu */
-    if (t.name == "kat") {
-        if (!t.checked) {
-            MENU
-                .filter((m) => m.cat == t.value)
-                .forEach(
-                    (m) => delete cart[m.id]
-                );
-        }
-
-        save();
-    }
-
-
-    /* Checkbox pilihan menu */
-    if (t.dataset.pick) {
-        if (t.checked) {
-            cart[t.dataset.pick] = 1;
-        } else {
-            delete cart[t.dataset.pick];
-        }
-
-        save();
-    }
-
-
-    /* Jumlah menu */
-    if (t.dataset.qty) {
-        cart[t.dataset.qty] = Math.max(
-            1,
-            parseInt(t.value) || 1
-        );
-
-        save();
-    }
-
-
-    /* Metode pembayaran */
-    if (t.name == "bayar") {
-        renderPay();
-    }
-});
-
-
-/* =========================================================
-   16. FORM PEMESANAN
-   ========================================================= */
-
-const form = $("#orderForm");
-
-if (form) {
-
-    /*
-        Tanggal minimum = hari ini.
-    */
-
-    $("#tgl").min =
-        new Date(
-            Date.now() -
-                new Date().getTimezoneOffset() * 6e4
-        )
-            .toISOString()
-            .slice(0, 10);
-
-
-    form.addEventListener("submit", (e) => {
-
-        e.preventDefault();
-
-
-        /* Helper untuk mengambil nilai input */
-        const v = (id) =>
-            $(id).value.trim();
-
-
-        /* Data pembayaran */
-        const bayar =
-            (
-                $("input[name=bayar]:checked") ||
-                {}
-            ).value;
-
-        const sub =
-            (
-                $("input[name=sub]:checked") ||
-                {}
-            ).value;
-
-
-        const errs = [];
-
-
-        /* Validasi nama */
-        if (!v("#nama")) {
-            errs.push(
-                "Nama lengkap wajib diisi."
-            );
-        }
-
-
-        /* Validasi nomor HP */
-        if (
-            !/^(\+62|62|0)8\d{7,12}$/.test(
-                v("#hp").replace(
-                    /[\s-]/g,
-                    ""
-                )
-            )
-        ) {
-            errs.push(
-                "Nomor HP tidak valid (contoh: 08123456789)."
-            );
-        }
-
-
-        /* Validasi tanggal */
-        if (!v("#tgl")) {
-            errs.push(
-                "Tanggal booking wajib diisi."
-            );
-        } else if (
-            v("#tgl") < $("#tgl").min
-        ) {
-            errs.push(
-                "Tanggal booking tidak boleh sebelum hari ini."
-            );
-        }
-
-
-        /* Validasi keranjang */
-        if (!Object.keys(cart).length) {
-            errs.push(
-                "Pilih minimal satu menu."
-            );
-        }
-
-
-        /* Validasi metode pembayaran */
-        if (!bayar) {
-            errs.push(
-                "Pilih metode pembayaran."
-            );
-        } else if (
-            PAY[bayar].length &&
-            !sub
-        ) {
-            errs.push(
-                "Pilih jenis " +
-                    (
-                        bayar == "kartu"
-                            ? "kartu"
-                            : "dompet digital"
-                    ) +
-                    "."
-            );
-        }
-
-
-        /* Validasi alamat */
-        if (!v("#alamat")) {
-            errs.push(
-                "Alamat pengantaran wajib diisi."
-            );
-        }
-
-
-        /* Tampilkan error */
-        const box = $("#errors");
-
-        box.innerHTML = errs.length
-            ? `
-                <div
-                    class="err"
-                    role="alert"
-                >
-
-                    <b>
-                        Mohon lengkapi data berikut:
-                    </b>
-
-                    <ul>
-                        ${errs
-                            .map(
-                                (x) =>
-                                    `<li>${x}</li>`
-                            )
-                            .join("")}
-                    </ul>
-
-                </div>
-                `
-            : "";
-
-
-        /* Jika ada error, hentikan submit */
-        if (errs.length) {
-            box.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-            return;
-        }
-
-
-        /* =================================================
-           MEMBUAT RINGKASAN PESANAN
-           ================================================= */
-
-        const items = Object.entries(cart)
-            .map(
-                ([id, q]) =>
-                    `- ${find(id).short} x${q} (${rp(
-                        find(id).price * q
-                    )})`
-            )
-            .join("\n");
-
-
-        const msg =
-            `HALO, SAYA INGIN MEMESAN\n\n` +
-            `Nama: ${v("#nama")}\n` +
-            `No. HP: ${v("#hp")}\n` +
-            `Tanggal Booking: ${v("#tgl")}\n\n` +
-            `PESANAN:\n${items}\n\n` +
-            `TOTAL:\n${rp(total())}\n\n` +
-            `METODE PEMBAYARAN:\n` +
-            `${PAYNAME[bayar]}` +
-            `${sub ? " - " + sub : ""}\n\n` +
-            `CATATAN:\n${v("#catatan") || "-"}\n\n` +
-            `ALAMAT:\n${v("#alamat")}`;
-
-
-        /* Tampilkan ringkasan */
-        $("#summary").textContent = msg;
-
-
-        /* Buat link WhatsApp */
-        $("#waBtn").href =
-            `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
-                msg
-            )}`;
-
-
-        /* Tampilkan modal */
-        $("#modal").classList.add("show");
-
-
-        /* Notifikasi */
-        toast(
-            "✅ Pesanan berhasil dibuat!"
-        );
-    });
-}
-
-
-/* =========================================================
-   17. ACTIVE NAVIGATION
-   ========================================================= */
-
-$$(
-    "#links a:not(.btn):not(.cartlink)"
-).forEach((a) => {
-
-    if (
-        a.getAttribute("href") ==
-        (
-            location.pathname
-                .split("/")
-                .pop() ||
-            "index.html"
-        )
-    ) {
-        a.classList.add("active");
-    }
-
-});
-
-
-/* =========================================================
-   18. INITIALIZATION
-   ========================================================= */
-
-/* Makanan unggulan di halaman Home */
-const fg = $("#featuredGrid");
-
-if (fg) {
-    fg.innerHTML = FEATURED
-        .map((id) => card(find(id)))
-        .join("");
-}
-
-
-/* Tampilkan menu */
-renderMenu();
-
-
-/* Refresh cart */
-refresh();
-```
