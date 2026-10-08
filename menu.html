@@ -1,103 +1,133 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Menu | Restoran Nusantara Maria</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<title>Menu dan Pemesanan - Restoran Nusantara Maria</title>
 </head>
-
 <body>
+<header id="site-header"></header>
 
-    <!-- ==================== NAVBAR ==================== -->
-    <header class="nav">
-        <div class="wrap bar">
+<main>
+  <section class="hero page-hero">
+    <div class="container"><h1>Menu Nusantara</h1><p>Pilih hidangan dari berbagai daerah, lalu pesan lewat form di bawah.</p></div>
+  </section>
 
-            <!-- Logo / Brand -->
-            <a class="brand" href="index.html">
-                <img
-                    src="images/logo.png"
-                    alt=""
-                    onerror="this.remove()"
-                >
+  <!-- DAFTAR MENU: kartu dibuat otomatis dari data MENU di script.js -->
+  <section class="section">
+    <div class="container">
+      <div class="filters" role="group" aria-label="Filter kategori">
+        <button class="filter active" data-filter="semua">Semua</button>
+        <button class="filter" data-filter="makanan">Makanan</button>
+        <button class="filter" data-filter="minuman">Minuman</button>
+        <button class="filter" data-filter="dessert">Dessert</button>
+      </div>
+      <div class="grid" id="menuGrid"></div>
+    </div>
+  </section>
 
-                <span>
-                    Restoran Nusantara <em>Maria</em>
-                </span>
-            </a>
+  <!-- FORM PEMESANAN -->
+  <section class="section alt" id="pesan">
+    <div class="container">
+      <h2 class="section-title">Form Pemesanan</h2>
+      <p class="section-sub">Lengkapi data di bawah. Pesanan akan dikirim ke WhatsApp restoran.</p>
 
+      <form id="orderForm" class="order" novalidate>
+        <div class="panel">
+          <div class="form-alert" id="formAlert" role="alert"></div>
 
-            <!-- Tombol Menu Mobile -->
-            <button
-                class="burger"
-                aria-label="Buka menu"
-                aria-expanded="false"
-            >
-                ☰
-            </button>
+          <fieldset>
+            <legend>Data Pelanggan</legend>
+            <div class="field"><label for="nama">Nama Lengkap</label>
+              <input type="text" id="nama" name="nama" placeholder="Contoh: Maria Susanti" autocomplete="name">
+              <small class="error" data-error="nama"></small></div>
+            <div class="field"><label for="hp">Nomor HP</label>
+              <input type="tel" id="hp" name="hp" placeholder="081234567890" autocomplete="tel">
+              <small class="error" data-error="hp"></small></div>
+            <div class="field"><label for="tanggal">Tanggal Booking</label>
+              <input type="date" id="tanggal" name="tanggal">
+              <small class="error" data-error="tanggal"></small></div>
+          </fieldset>
 
+          <fieldset>
+            <legend>Pilihan Menu</legend>
+            <div class="field">
+              <div class="cat-row">
+                <label class="opt"><input type="checkbox" name="kategori" value="makanan"> Makanan</label>
+                <label class="opt"><input type="checkbox" name="kategori" value="minuman"> Minuman</label>
+                <label class="opt"><input type="checkbox" name="kategori" value="dessert"> Dessert</label>
+              </div>
+              <div id="pickList"></div>
+              <small class="error" data-error="menu"></small>
+            </div>
+          </fieldset>
 
-            <!-- Navigasi -->
-            <nav id="links">
+          <fieldset>
+            <legend>Metode Pembayaran</legend>
+            <div class="field">
+              <div class="cat-row">
+                <label class="opt"><input type="radio" name="bayar" value="Kartu Debit/Kredit"> Kartu Debit/Kredit</label>
+                <label class="opt"><input type="radio" name="bayar" value="Dompet Digital"> Dompet Digital</label>
+                <label class="opt"><input type="radio" name="bayar" value="Cash"> Cash</label>
+              </div>
 
-                <a href="index.html">
-                    Home
-                </a>
+              <!-- Logo: placeholder berupa label berwarna. Ganti dengan gambar, misalnya
+                   <img src="images/visa.png" alt="Visa" height="26"> -->
+              <div class="sub-pay" id="subCard" hidden>
+                <label class="opt"><input type="radio" name="opsi" value="Visa"><span class="chip visa">VISA</span> Visa</label>
+                <label class="opt"><input type="radio" name="opsi" value="Mastercard">
+                  <span class="chip mc"><svg width="38" height="22" viewBox="0 0 38 22" aria-hidden="true"><circle cx="13" cy="11" r="10" fill="#eb001b"/><circle cx="25" cy="11" r="10" fill="#f79e1b" fill-opacity=".9"/></svg></span> Mastercard</label>
+              </div>
+              <div class="sub-pay" id="subWallet" hidden>
+                <label class="opt"><input type="radio" name="opsi" value="GoPay"><span class="chip gopay">GoPay</span></label>
+                <label class="opt"><input type="radio" name="opsi" value="OVO"><span class="chip ovo">OVO</span></label>
+                <label class="opt"><input type="radio" name="opsi" value="DANA"><span class="chip dana">DANA</span></label>
+                <label class="opt"><input type="radio" name="opsi" value="ShopeePay"><span class="chip shopee">ShopeePay</span></label>
+              </div>
+              <small class="error" data-error="bayar"></small>
+            </div>
+          </fieldset>
 
-                <a href="menu.html">
-                    Menu
-                </a>
-
-                <a href="tentang.html">
-                    Tentang Kami
-                </a>
-
-                <a href="kontak.html">
-                    Kontak
-                </a>
-
-                <!-- Keranjang -->
-                <a
-                    class="cartlink"
-                    href="menu.html#pesan"
-                    aria-label="Keranjang"
-                >
-                    🛒
-                    <span class="cartCount">0</span>
-                </a>
-
-                <!-- Tombol Pesan -->
-                <a
-                    class="btn sm"
-                    href="menu.html#pesan"
-                >
-                    Pesan Sekarang
-                </a>
-
-            </nav>
-
+          <fieldset>
+            <legend>Pengantaran dan Catatan</legend>
+            <div class="field"><label for="alamat">Alamat Pengantaran</label>
+              <textarea id="alamat" name="alamat" placeholder="Jalan, nomor rumah, RT/RW, kelurahan"></textarea>
+              <small class="error" data-error="alamat"></small></div>
+            <div class="field"><label for="catatan">Catatan Pesanan</label>
+              <textarea id="catatan" name="catatan" placeholder="Contoh: Pedas sedang, tidak menggunakan bawang."></textarea></div>
+          </fieldset>
         </div>
-    </header>
 
+        <aside class="panel summary" aria-live="polite">
+          <h3>Pesanan Anda</h3>
+          <div id="sumList"></div>
+          <div class="total"><span>Total</span><span id="sumTotal">Rp0</span></div>
+          <button type="submit" class="btn btn-gold full">Kirim Pesanan</button>
+        </aside>
+      </form>
+    </div>
+  </section>
+</main>
 
-    <!-- ==================== MAIN CONTENT ==================== -->
-    <main>
+<!-- Jendela ringkasan setelah pesanan berhasil -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <h3 id="modalTitle">Pesanan berhasil dibuat</h3>
+    <p>Periksa ringkasan di bawah, lalu kirim ke WhatsApp restoran.</p>
+    <pre id="modalSummary"></pre>
+    <div class="modal-actions">
+      <a class="btn btn-gold" id="waLink" href="#" target="_blank" rel="noopener">Kirim via WhatsApp</a>
+      <button type="button" class="btn btn-line" id="modalClose">Ubah Pesanan</button>
+      <button type="button" class="btn btn-line" id="newOrder">Pesanan Baru</button>
+    </div>
+  </div>
+</div>
 
-        <!-- ==================== HEADER MENU ==================== -->
-        <section class="pagehead">
-            <div class="wrap">
-
-                <h1>
-                    Daftar Menu
-```
+<footer id="site-footer"></footer>
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
