@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Home | Restoran Nusantara Maria</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<title>Restoran Nusantara Maria - Cita Rasa Nusantara</title>
+<meta name="description" content="Makanan dan minuman khas Indonesia dari berbagai daerah.">
 </head>
-
 <body>
+<!-- Navbar dibuat oleh script.js (fungsi buildLayout) -->
+<header id="site-header"></header>
 
-    <!-- ==================== NAVBAR ==================== -->
-    <header class="nav">
-        <div class="wrap bar">
+<main>
+  <!-- HERO. Ganti foto latar: simpan foto sebagai images/hero.jpg -->
+  <section class="hero">
+    <div class="container">
+      <h1>Cita Rasa Nusantara, Hadir di Setiap Sajian</h1>
+      <p>Dari rendang Minang sampai gudeg Jogja, kami menyajikan hidangan khas berbagai daerah Indonesia dengan resep turun-temurun dan bahan segar pilihan.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="menu.html">Lihat Menu</a>
+        <a class="btn btn-outline" href="menu.html#pesan">Pesan Sekarang</a>
+      </div>
+    </div>
+  </section>
 
-            <!-- Logo / Brand -->
-            <a class="brand" href="index.html">
-                <img
-                    src="images/logo.jpg"
-                    alt=""
-                    onerror="this.remove()"
-                >
+  <!-- MAKANAN UNGGULAN (kartu dibuat otomatis dari data MENU di script.js) -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Makanan Unggulan</h2>
+      <p class="section-sub">Pilihan favorit pelanggan kami. Klik tombol untuk menambahkannya ke pesanan.</p>
+      <div class="grid" id="featuredGrid"></div>
+    </div>
+  </section>
 
-                <span>
-                    Restoran Nusantara <em>Maria</em>
-                </span>
-            </a>
+  <!-- VIDEO RESTORAN. Ganti video: simpan file baru sebagai video/restoran.mp4 -->
+  <section class="section alt">
+    <div class="container two-col">
+      <div class="text-block reveal">
+        <h2>Suasana Dapur dan Meja Makan Kami</h2>
+        <p>Tonton bagaimana setiap hidangan disiapkan dengan bumbu segar dan api arang, lalu disajikan hangat di meja Anda.</p>
+      </div>
+      <div class="video-wrap reveal">
+        <video controls preload="metadata" poster="images/poster.jpg">
+          <source src="video/restoran.mp4" type="video/mp4">
+          Browser Anda tidak mendukung pemutar video.
+        </video>
+      </div>
+    </div>
+  </section>
 
+  <!-- POSTER RESTORAN (images/poster.jpg) -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Poster Restoran</h2>
+      <p class="section-sub">Informasi menu dan promo terbaru restoran kami.</p>
+      <img class="poster-img reveal" src="images/poster.jpg" alt="Poster Restoran Nusantara Maria" style="max-width:640px;margin-inline:auto">
+    </div>
+  </section>
+</main>
 
-            <!-- Tombol Menu Mobile -->
-            <button
-                class="burger"
-                aria-label="Buka menu"
-                aria-expanded="false"
-            >
-                ☰
-            </button>
-
-
-            <!-- Navigasi -->
-            <nav id="links">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="menu.html">
-```
+<footer id="site-footer"></footer>
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
