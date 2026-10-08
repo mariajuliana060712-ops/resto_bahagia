@@ -1,220 +1,47 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Kontak | Restoran Nusantara Maria</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<title>Kontak - Restoran Nusantara Maria</title>
 </head>
-
 <body>
+<header id="site-header"></header>
 
-    <!-- ==================== NAVBAR ==================== -->
-    <header class="nav">
-        <div class="wrap bar">
+<main>
+  <section class="hero page-hero">
+    <div class="container"><h1>Hubungi Kami</h1><p>Kami siap menjawab pertanyaan dan menerima reservasi Anda.</p></div>
+  </section>
 
-            <a class="brand" href="index.html">
-                <img
-                    src="images/logo.png"
-                    alt=""
-                    onerror="this.remove()"
-                >
+  <section class="section">
+    <div class="container">
+      <!-- GANTI data kontak di bawah ini (alamat, WhatsApp, email, Instagram, jam) -->
+      <div class="grid">
+        <div class="feature contact-card"><div class="icon">📍</div><h3>Alamat</h3><p>Jl. Contoh No. 123, Pamulang, Tangerang Selatan, Banten.</p></div>
+        <div class="feature contact-card"><div class="icon">💬</div><h3>WhatsApp</h3><p>+62 812-3456-7890</p></div>
+        <div class="feature contact-card"><div class="icon">✉️</div><h3>Email</h3><p>restoran@example.com</p></div>
+        <div class="feature contact-card"><div class="icon">📷</div><h3>Instagram</h3><p>@restorannusantara</p></div>
+        <div class="feature contact-card"><div class="icon">🕙</div><h3>Jam Operasional</h3><p>Senin - Minggu<br>10.00 - 22.00 WIB</p></div>
+      </div>
 
-                <span>
-                    Restoran Nusantara <em>Maria</em>
-                </span>
-            </a>
+      <div class="btn-row">
+        <a class="btn btn-gold" href="https://wa.me/6281234567890" target="_blank" rel="noopener">Chat WhatsApp</a>
+        <a class="btn btn-green" href="https://instagram.com/restorannusantara" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-line" href="mailto:restoran@example.com">Kirim Email</a>
+      </div>
 
-            <button
-                class="burger"
-                aria-label="Buka menu"
-                aria-expanded="false"
-            >
-                ☰
-            </button>
+      <!-- Google Maps. Untuk lokasi asli: Google Maps, Bagikan, Sematkan peta, salin src iframe -->
+      <iframe class="map" title="Lokasi Restoran Nusantara Maria" loading="lazy"
+        src="https://maps.google.com/maps?q=Pamulang,Tangerang+Selatan&output=embed"></iframe>
+    </div>
+  </section>
+</main>
 
-            <nav id="links">
-                <a href="index.html">Home</a>
-                <a href="menu.html">Menu</a>
-                <a href="tentang.html">Tentang Kami</a>
-                <a href="kontak.html">Kontak</a>
-
-                <a
-                    class="cartlink"
-                    href="menu.html#pesan"
-                    aria-label="Keranjang"
-                >
-                    🛒
-                    <span class="cartCount">0</span>
-                </a>
-
-                <a class="btn sm" href="menu.html#pesan">
-                    Pesan Sekarang
-                </a>
-            </nav>
-
-        </div>
-    </header>
-
-
-    <!-- ==================== MAIN CONTENT ==================== -->
-    <main>
-
-        <!-- Page Header -->
-        <section class="pagehead">
-            <div class="wrap">
-                <h1>Hubungi Kami</h1>
-                <p>
-                    Kami siap membantu reservasi dan pesanan Anda
-                </p>
-            </div>
-        </section>
-
-
-        <!-- Contact Information -->
-        <section>
-            <div class="wrap">
-
-                <div class="cols">
-
-                    <!-- Alamat -->
-                    <div class="box">
-                        <span>📍</span>
-                        <h3>Alamat</h3>
-                        <p>
-                            Jl. Contoh No. 123, Pamulang,
-                            Tangerang Selatan, Banten.
-                        </p>
-                    </div>
-
-
-                    <!-- WhatsApp -->
-                    <div class="box">
-                        <span>💬</span>
-                        <h3>WhatsApp</h3>
-                        <p>
-                            +62 812-3456-7890
-                        </p>
-                    </div>
-
-
-                    <!-- Email -->
-                    <div class="box">
-                        <span>✉️</span>
-                        <h3>Email</h3>
-                        <p>
-                            restoran@example.com
-                        </p>
-                    </div>
-
-
-                    <!-- Instagram -->
-                    <div class="box">
-                        <span>📸</span>
-                        <h3>Instagram</h3>
-                        <p>
-                            @restorannusantara
-                        </p>
-                    </div>
-
-
-                    <!-- Jam Operasional -->
-                    <div class="box">
-                        <span>🕙</span>
-                        <h3>Jam Operasional</h3>
-                        <p>
-                            Senin - Minggu<br>
-                            10.00 - 22.00 WIB
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <!-- ==================== CONTACT BUTTONS ==================== -->
-                <!--
-                    Ganti nomor WhatsApp, email, dan Instagram
-                    sesuai dengan data restoran yang sebenarnya.
-                -->
-
-                <div class="acts">
-
-                    <a
-                        class="btn dark"
-                        href="https://wa.me/6281234567890"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        Chat WhatsApp
-                    </a>
-
-                    <a
-                        class="btn"
-                        href="https://instagram.com/restorannusantara"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        Instagram
-                    </a>
-
-                    <a
-                        class="btn"
-                        href="mailto:restoran@example.com"
-                    >
-                        Kirim Email
-                    </a>
-
-                </div>
-
-
-                <!-- ==================== GOOGLE MAPS ==================== -->
-                <!--
-                    Untuk mengganti lokasi:
-                    1. Cari lokasi restoran di Google Maps.
-                    2. Pilih Bagikan.
-                    3. Pilih Sematkan peta.
-                    4. Salin URL pada bagian src iframe.
-                -->
-
-                <iframe
-                    title="Lokasi restoran"
-                    loading="lazy"
-                    src="https://www.google.com/maps?q=Pamulang,Tangerang+Selatan&output=embed"
-                >
-                </iframe>
-
-            </div>
-        </section>
-
-    </main>
-
-
-    <!-- ==================== FOOTER ==================== -->
-    <footer>
-        <div class="wrap">
-            <p>
-                © 2026 Restoran Nusantara Maria ·
-                Jl. Contoh No. 123, Pamulang, Tangerang Selatan
-            </p>
-        </div>
-    </footer>
-
-
-    <!-- JavaScript -->
-    <script src="script.js"></script>
-
+<footer id="site-footer"></footer>
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
 </body>
-
 </html>
-```
