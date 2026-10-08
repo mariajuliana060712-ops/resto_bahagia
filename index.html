@@ -1,238 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kopi Bahagia - Promosi</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4ece1; color: #4a3525; text-align: center; padding: 20px; margin: 0; }
-
-        /* Tabel utama = kerangka halaman */
-        table.layout { width: 100%; max-width: 800px; margin: 0 auto; background: #fff; border-collapse: separate; border-spacing: 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        table.layout > thead > tr > td, table.layout > tbody > tr > td { padding: 15px 30px; }
-
-        h1 { color: #6f4e37; margin: 15px 0 5px; }
-        h2 { color: #6f4e37; margin: 5px 0 12px; }
-        p.subtitle { font-size: 1.1rem; color: #8c6d58; margin: 0 0 10px; }
-
-        /* Navigasi (tabel) */
-        table.nav { width: 100%; border-collapse: collapse; border-bottom: 2px solid #e6d9c8; }
-        table.nav td { width: 25%; padding: 12px 5px; text-align: center; }
-        table.nav a { color: #6f4e37; text-decoration: none; font-weight: bold; }
-        table.nav a:hover { text-decoration: underline; color: #533927; }
-
-        video { width: 100%; max-width: 700px; height: auto; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
-
-        /* Tabel data */
-        table.data { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
-        table.data caption { caption-side: top; font-weight: bold; font-size: 1.1rem; color: #6f4e37; padding-bottom: 8px; }
-        table.data th { background: #6f4e37; color: #fff; padding: 10px; border: 1px solid #6f4e37; }
-        table.data td { padding: 10px; border: 1px solid #e6d9c8; vertical-align: middle; }
-        table.data tbody tr:nth-child(even) { background: #faf6f0; }
-        .num { text-align: right; white-space: nowrap; }
-        .old { text-decoration: line-through; color: #a79483; }
-        .new { font-weight: bold; color: #6f4e37; }
-        .badge { background: #f4ece1; border: 1px solid #d8c7b5; border-radius: 12px; padding: 2px 8px; font-size: 0.8rem; white-space: nowrap; }
-
-        /* Keunggulan: tabel 3 kolom */
-        table.features { width: 100%; border-collapse: separate; border-spacing: 8px; }
-        table.features td { width: 33.33%; background: #faf6f0; border: 1px solid #e6d9c8; border-radius: 10px; padding: 14px 10px; text-align: center; font-size: 0.9rem; vertical-align: top; }
-        table.features .icon { font-size: 1.8rem; display: block; margin-bottom: 4px; }
-
-        .btn-order { display: inline-block; background-color: #6f4e37; color: #fff; padding: 12px 28px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 25px; transition: background-color 0.3s ease; }
-        .btn-order:hover { background-color: #533927; }
-
-        .order-section td { text-align: left; }
-        .order-section ul { line-height: 1.8; margin: 0; }
-        .credit { font-size: 0.75rem; color: #b0a294; margin: 10px 0 0; }
-
-        @media (max-width: 600px) {
-            table.layout > thead > tr > td, table.layout > tbody > tr > td { padding: 12px; }
-            table.features, table.features tbody, table.features tr, table.features td { display: block; width: auto; }
-            table.features td { margin-bottom: 8px; }
-            table.data { font-size: 0.85rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<title>Restoran Nusantara Maria - Cita Rasa Nusantara</title>
+<meta name="description" content="Makanan dan minuman khas Indonesia dari berbagai daerah.">
 </head>
 <body>
+<!-- Navbar dibuat oleh script.js (fungsi buildLayout) -->
+<header id="site-header"></header>
 
-<table class="layout">
-    <thead>
-        <tr>
-            <td>
-                <h1>☕ Kopi Bahagia ♡</h1>
-                <p class="subtitle">Aroma Terbaik untuk Semangat Hari-mu</p>
-            </td>
-        </tr>
-    </thead>
+<main>
+  <!-- HERO. Ganti foto latar: simpan foto sebagai images/hero.jpg -->
+  <section class="hero">
+    <div class="container">
+      <h1>Cita Rasa Nusantara, Hadir di Setiap Sajian</h1>
+      <p>Dari rendang Minang sampai gudeg Jogja, kami menyajikan hidangan khas berbagai daerah Indonesia dengan resep turun-temurun dan bahan segar pilihan.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="menu.html">Lihat Menu</a>
+        <a class="btn btn-outline" href="menu.html#pesan">Pesan Sekarang</a>
+      </div>
+    </div>
+  </section>
 
-    <tbody>
-        <!-- Navigasi (tabel di dalam tabel) -->
-        <tr>
-            <td>
-                <table class="nav">
-                    <tr>
-                        <td><a href="index.html">Beranda</a></td>
-                        <td><a href="menu.html">Menu</a></td>
-                        <td><a href="tentang.html">Tentang Kami</a></td>
-                        <td><a href="kontak.html">Kontak</a></td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+  <!-- MAKANAN UNGGULAN (kartu dibuat otomatis dari data MENU di script.js) -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Makanan Unggulan</h2>
+      <p class="section-sub">Pilihan favorit pelanggan kami. Klik tombol untuk menambahkannya ke pesanan.</p>
+      <div class="grid" id="featuredGrid"></div>
+    </div>
+  </section>
 
-        <!-- Video -->
-        <tr>
-            <td>
-                <!-- Video dari Mixkit (mixkit.co), Mixkit License: https://mixkit.co/license/#videoFree -->
-                <video id="coffeeVideo" controls muted loop playsinline poster="./KopiBahagiaPoster.png">
-                    <source src="./KopiBahagia.mp4" type="video/mp4">
-                    Browser kamu tidak mendukung pemutaran video.
-                </video>
-            </td>
-        </tr>
+  <!-- VIDEO RESTORAN. Ganti video: simpan file baru sebagai video/restoran.mp4 -->
+  <section class="section alt">
+    <div class="container two-col">
+      <div class="text-block reveal">
+        <h2>Suasana Dapur dan Meja Makan Kami</h2>
+        <p>Tonton bagaimana setiap hidangan disiapkan dengan bumbu segar dan api arang, lalu disajikan hangat di meja Anda.</p>
+      </div>
+      <div class="video-wrap reveal">
+        <video controls preload="metadata" poster="images/poster.jpg">
+          <source src="video/restoran.mp4" type="video/mp4">
+          Browser Anda tidak mendukung pemutar video.
+        </video>
+      </div>
+    </div>
+  </section>
 
-        <!-- Tabel promo paket hemat -->
-        <tr>
-            <td>
-                <table class="data">
-                    <caption>🎉 Promo Paket Hemat</caption>
-                    <thead>
-                        <tr>
-                            <th>Paket</th>
-                            <th>Isi Paket</th>
-                            <th class="num">Harga Normal</th>
-                            <th class="num">Harga Promo</th>
-                            <th class="num">Hemat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Paket Pagi</strong></td>
-                            <td>Kopi Susu Gula Aren + Croissant</td>
-                            <td class="num old">Rp35.000</td>
-                            <td class="num new">Rp32.000</td>
-                            <td class="num">Rp3.000</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Paket Santai</strong></td>
-                            <td>Cappuccino + Cake Cokelat</td>
-                            <td class="num old">Rp43.000</td>
-                            <td class="num new">Rp39.000</td>
-                            <td class="num">Rp4.000</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Paket Hijau</strong></td>
-                            <td>Matcha Latte + Roti Cokelat</td>
-                            <td class="num old">Rp37.000</td>
-                            <td class="num new">Rp34.000</td>
-                            <td class="num">Rp3.000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
+  <!-- POSTER RESTORAN (images/poster.jpg) -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Poster Restoran</h2>
+      <p class="section-sub">Informasi menu dan promo terbaru restoran kami.</p>
+      <img class="poster-img reveal" src="images/poster.jpg" alt="Poster Restoran Nusantara Maria" style="max-width:640px;margin-inline:auto">
+    </div>
+  </section>
+</main>
 
-        <!-- Tabel jadwal promo -->
-        <tr>
-            <td>
-                <table class="data">
-                    <caption>📅 Jadwal Promo Mingguan</caption>
-                    <thead>
-                        <tr><th>Hari</th><th>Promo</th><th>Keterangan</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Senin – Kamis</td>
-                            <td><span class="badge">Paket Pagi</span></td>
-                            <td>Berlaku pukul 07.00 – 11.00</td>
-                        </tr>
-                        <tr>
-                            <td>Jumat</td>
-                            <td><span class="badge">Diskon 10%</span></td>
-                            <td>Untuk semua menu minuman</td>
-                        </tr>
-                        <tr>
-                            <td>Sabtu – Minggu</td>
-                            <td><span class="badge">Paket Santai</span></td>
-                            <td>Berlaku sepanjang hari</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-
-        <!-- Keunggulan (tabel 3 kolom) -->
-        <tr>
-            <td>
-                <h2>Kenapa Kopi Bahagia?</h2>
-                <table class="features">
-                    <tr>
-                        <td><span class="icon">🌱</span><strong>Bahan Pilihan</strong><br>Biji kopi dan bahan segar setiap hari</td>
-                        <td><span class="icon">🛋️</span><strong>Tempat Nyaman</strong><br>Cocok untuk belajar dan berkumpul</td>
-                        <td><span class="icon">💸</span><strong>Harga Bersahabat</strong><br>Menu mulai dari Rp15.000</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-
-        <!-- Tombol pesan -->
-        <tr>
-            <td>
-                <a href="#order" class="btn-order">Pesan Kopi Sekarang</a>
-                <p class="credit">Video: Mixkit.co (bebas royalti, gratis untuk komersial)</p>
-            </td>
-        </tr>
-
-        <!-- Cara pesan (tujuan anchor #order) -->
-        <tr id="order" class="order-section">
-            <td>
-                <h2 style="text-align:center;">Cara Pesan</h2>
-                <ul>
-                    <li>Lihat menu lengkap kami di halaman <a href="menu.html">Menu</a>.</li>
-                    <li>Hubungi kami lewat halaman <a href="kontak.html">Kontak</a>, atau kirim email ke
-                        <a href="mailto:kopibahagia@gmail.com">kopibahagia@gmail.com</a>.</li>
-                    <li>Kunjungi juga profil kami di
-                        <a href="https://www.instagram.com/" target="_blank">Instagram</a>.</li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div id="page-bottom"></div>
-
-<script>
-    const video = document.getElementById("coffeeVideo");
-    const bottomMarker = document.getElementById("page-bottom");
-    const delay = 5000;
-    let timer;
-
-    video.muted = true;
-
-    function resetVideo() {
-        clearTimeout(timer);
-        video.pause();
-        video.currentTime = 0;
-        video.load();
-        // Poster tampil selama 5 detik
-        timer = setTimeout(() => {
-            video.play().catch(error => console.error("Video gagal diputar:", error));
-        }, delay);
-    }
-
-    window.addEventListener("load", resetVideo);
-
-    // Ulangi ketika pengguna sampai di bagian bawah halaman
-    const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) resetVideo();
-    });
-    observer.observe(bottomMarker);
-
-    video.addEventListener("error", () => {
-        console.error("File video tidak ditemukan atau format video tidak didukung.");
-    });
-</script>
-
+<footer id="site-footer"></footer>
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
 </body>
 </html>
